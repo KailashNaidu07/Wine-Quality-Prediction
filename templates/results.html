@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Results</h1>
+        
+        <div class="result-card {{ 'high-quality' if result.prediction == 'High Quality' else 'standard-quality' }}">
+            <h2>{{ result.prediction }}</h2>
+            <p class="probability">Confidence: {{ result.probability }}%</p>
+        </div>
+        
+        <h3>Input Details:</h3>
+        <table class="input-details">
+            <tr>
+                <th>Feature</th>
+                <th>Value</th>
+            </tr>
+            {% for key, value in result.input_data.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <a href="/" class="btn-back">Try Another Prediction</a>
+    </div>
+</body>
+</html>
